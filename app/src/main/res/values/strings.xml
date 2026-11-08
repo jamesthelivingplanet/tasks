@@ -234,6 +234,7 @@ File %1$s contained %2$s.\n\n
   <string name="restart_now">Restart now</string>
   <string name="restart_later">Later</string>
   <string name="widget_settings">Widget settings</string>
+  <string name="calendar_widget_more">More options</string>
   <string name="calendar_action_complete">Mark completed</string>
   <string name="calendar_action_uncomplete">Mark incomplete</string>
   <string name="calendar_action_reschedule">Reschedule</string>

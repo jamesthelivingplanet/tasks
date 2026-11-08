@@ -52,11 +52,15 @@ internal class TasksWidgetBuilder(
     private val chipProvider: WidgetChipProvider,
     private val markdown: Markdown,
     private val headerFormatter: HeaderFormatter,
+    private val flatList: Boolean = false,
+    private val rowActions: Boolean = false,
 ) {
     private val indentPadding = (20 * context.resources.displayMetrics.density).toInt()
     private val settings = widgetPreferences.getWidgetListSettings()
+    private val moreButtonWidth = (40 * context.resources.displayMetrics.density).toInt()
     private val hPad = context.resources.getDimension(R.dimen.widget_padding).toInt()
-    private val disableGroups = !filter.supportsSorting()
+    private val disableGroups = flatList
+            || !filter.supportsSorting()
             || (filter.supportsManualSort() && widgetPreferences.isManualSort)
             || (filter is AstridOrderingFilter && widgetPreferences.isAstridSort)
     private val onSurface = context.getColor(if (settings.isDark) R.color.white_87 else R.color.black_87)
@@ -124,7 +128,10 @@ internal class TasksWidgetBuilder(
                 !settings.showDueDates && task.isOverdue -> context.getColor(R.color.overdue)
                 else -> onSurface
             }
-            RemoteViews(BuildConfig.APPLICATION_ID, R.layout.widget_row).apply {
+            RemoteViews(
+                BuildConfig.APPLICATION_ID,
+                if (rowActions) R.layout.calendar_row else R.layout.widget_row,
+            ).apply {
                 strikethrough(R.id.widget_text, task.isCompleted)
                 setTextSize(R.id.widget_text, settings.textSize)
                 if (settings.showDueDates) {
@@ -224,6 +231,18 @@ internal class TasksWidgetBuilder(
                         .getTagChips(filter, taskContainer)
                         .forEach { addView(R.id.chips, it) }
                 }
+                if (rowActions) {
+                    setColorFilter(R.id.widget_more, onSurfaceVariant)
+                    setOnClickFillInIntent(
+                        R.id.widget_more,
+                        Intent(WidgetClickActivity.TASK_ACTIONS)
+                            .putExtra(WidgetClickActivity.EXTRA_TASK_ID, task.id)
+                            .putExtra(WidgetClickActivity.EXTRA_WIDGET, widgetId)
+                    )
+                    if (!settings.showDueDates) {
+                        setViewPadding(R.id.widget_text, 0, 0, moreButtonWidth, 0)
+                    }
+                }
                 val startPad = taskContainer.indent * indentPadding
                 setViewPadding(R.id.widget_row, startPad, 0, 0, 0)
             }
@@ -233,9 +252,9 @@ internal class TasksWidgetBuilder(
         }
     }
 
-    private suspend fun getQuery(filter: Filter): String {
+    internal suspend fun fetchTasks(limit: Int? = MAX_ITEMS): List<TaskContainer> {
         subtasksHelper.applySubtasksToWidgetFilter(filter, widgetPreferences)
-        return getQuery(widgetPreferences, filter, MAX_ITEMS)
+        return taskDao.fetchTasks(getQuery(widgetPreferences, filter, limit))
     }
 
     private fun formatDueDate(
@@ -287,12 +306,12 @@ internal class TasksWidgetBuilder(
         }
     }
 
-    suspend fun buildItems(): RemoteCollectionItems {
+    suspend fun buildItems(preloaded: List<TaskContainer>? = null): RemoteCollectionItems {
         var totalParcelSize = 0
         val dateFormatter = DateFormatter.create(context.is24HourFormat)
         val collapsed = widgetPreferences.collapsed
         val tasks = SectionedDataSource(
-            taskDao.fetchTasks(getQuery(filter)),
+            preloaded ?: fetchTasks(),
             disableGroups,
             settings.groupMode,
             widgetPreferences.subtaskMode,
@@ -316,7 +335,7 @@ internal class TasksWidgetBuilder(
                 widgetPreferences.collapsed = it
             }
         }
-        val hasMoreItems = tasks.taskCount >= MAX_ITEMS
+        val hasMoreItems = preloaded == null && tasks.taskCount >= MAX_ITEMS
         Timber.d("buildItems loaded ${tasks.size} items for widget $widgetId")
 
         data class WidgetItem(val id: Long, val view: RemoteViews, val isHeader: Boolean)
