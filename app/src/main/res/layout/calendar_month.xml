@@ -1,0 +1,1902 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:id="@+id/calendar_month_row_0"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_0"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_0"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_1"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_1"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_2"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_2"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_3"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_3"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_4"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_4"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_5"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_5"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_6"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_6"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/calendar_month_row_1"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_7"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_7"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_8"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_8"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_9"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_9"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_10"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_10"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_11"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_11"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_12"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_12"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_12"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_12"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_13"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_13"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/calendar_month_row_2"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_14"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_14"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_15"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_15"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_16"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_16"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_16"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_17"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_17"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_17"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_17"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_18"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_18"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_18"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_18"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_19"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_19"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_19"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_19"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_20"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_20"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/calendar_month_row_3"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_21"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_21"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_22"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_22"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_22"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_22"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_23"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_23"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_23"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_23"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_24"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_24"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_25"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_25"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_26"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_26"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_26"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_26"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_27"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_27"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_27"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_27"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/calendar_month_row_4"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_28"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_28"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_28"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_28"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_29"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_29"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_29"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_29"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_30"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_30"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_31"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_31"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_31"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_31"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_32"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_32"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_32"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_32"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_33"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_33"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_33"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_33"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_34"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_34"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_34"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_34"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/calendar_month_row_5"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_35"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_35"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_35"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_35"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_36"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_36"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_36"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_36"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_37"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_37"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_37"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_37"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_38"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_38"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_38"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_38"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_39"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_39"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_39"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_39"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_40"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_40"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_40"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_40"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/calendar_m_cell_41"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+          android:layout_width="26dp"
+          android:layout_height="26dp">
+
+          <ImageView
+            android:id="@+id/calendar_m_bg_41"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:visibility="gone" />
+
+          <TextView
+            android:id="@+id/calendar_m_text_41"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+          android:id="@+id/calendar_m_dot_41"
+          android:layout_width="4dp"
+          android:layout_height="4dp"
+          android:layout_marginTop="1dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/calendar_dot"
+          android:visibility="invisible" />
+      </LinearLayout>
+    </FrameLayout>
+  </LinearLayout>
+</LinearLayout>
