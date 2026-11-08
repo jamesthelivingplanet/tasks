@@ -84,7 +84,6 @@ import org.tasks.compose.home.HomeScreen
 import org.tasks.compose.navigateClearingBackStack
 import org.tasks.viewmodel.OnboardingNavigation
 import org.tasks.viewmodel.OnboardingScreen
-import org.tasks.data.createDueDate
 import org.tasks.data.dao.AlarmDao
 import org.tasks.data.dao.CaldavDao
 import org.tasks.data.dao.LocationDao
@@ -588,12 +587,11 @@ class MainActivity : AppCompatActivity() {
             intent.removeExtra(CREATE_SOURCE)
             val dueDate = intent.getLongExtra(CREATE_DUE_DATE, 0L)
             intent.removeExtra(CREATE_DUE_DATE)
-            taskCreator.createWithValues(filter ?: defaultFilterProvider.getDefaultList(), "")
-                .apply {
-                    if (dueDate > 0) {
-                        this.dueDate = createDueDate(Task.URGENCY_SPECIFIC_DAY, dueDate)
-                    }
-                }
+            taskCreator.createWithValues(
+                filter ?: defaultFilterProvider.getDefaultList(),
+                "",
+                dueDate = dueDate,
+            )
         }
 
         intent.hasExtra(OPEN_TASK) -> {

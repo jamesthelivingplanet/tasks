@@ -45,6 +45,18 @@ class TaskCreatorTest : InjectingTestCase() {
     }
 
     @Test
+    fun setDefaultStartFromTheGivenDueDate() = runBlocking {
+        preferences.setString(R.string.p_default_hideUntil_key, Task.HIDE_UNTIL_DUE.toString())
+        val due = DateTime(2021, 2, 20).millis
+        val task = freezeAt(DateTime(2021, 2, 4, 14, 56, 34, 126)) {
+            taskCreator.createWithValues(null, "", dueDate = due)
+        }
+
+        assertEquals(createDueDate(URGENCY_SPECIFIC_DAY, due), task.dueDate)
+        assertEquals(DateTime(2021, 2, 20).millis, task.hideUntil)
+    }
+
+    @Test
     fun setDefaultStartWithFilterDue() = runBlocking {
         preferences.setString(R.string.p_default_hideUntil_key, Task.HIDE_UNTIL_DUE.toString())
         val task = freezeAt(DateTime(2021, 2, 4, 14, 56, 34, 126)) {

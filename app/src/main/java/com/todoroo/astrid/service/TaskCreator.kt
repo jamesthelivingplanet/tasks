@@ -134,8 +134,15 @@ class TaskCreator @Inject constructor(
         title: String?,
         parseTitle: Boolean = true,
         applyDefaults: Boolean = true,
+        dueDate: Long = 0L,
     ): Task =
-        create(mapFromSerializedString(filter?.valuesForNewTasks), title, parseTitle, applyDefaults)
+        create(
+            mapFromSerializedString(filter?.valuesForNewTasks),
+            title,
+            parseTitle,
+            applyDefaults,
+            dueDate,
+        )
 
     /**
      * Create task from the given content values, saving it. This version doesn't need to start with a
@@ -146,6 +153,7 @@ class TaskCreator @Inject constructor(
         title: String?,
         parseTitle: Boolean = true,
         applyDefaults: Boolean = true,
+        dueDate: Long = 0L,
     ): Task {
         val task = Task(
             title = title?.trim { it <= ' ' },
@@ -182,7 +190,9 @@ class TaskCreator @Inject constructor(
                     value.substitute()?.toLongOrNull()?.let { task.hideUntil = it.startOfDay() }
             }
         }
-        if (applyDefaults && values?.containsKey(DUE_DATE.name) != true) {
+        if (dueDate > 0) {
+            task.dueDate = createDueDate(Task.URGENCY_SPECIFIC_DAY, dueDate)
+        } else if (applyDefaults && values?.containsKey(DUE_DATE.name) != true) {
             task.dueDate = createDueDate(
                     preferences.getIntegerFromString(R.string.p_default_urgency_key, Task.URGENCY_NONE),
                     0)

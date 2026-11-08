@@ -51,6 +51,28 @@ class RowConditionTest : TaskListTest() {
         assertEquals(false, PARENT in titles)
     }
 
+    @Test
+    fun aSubtaskUnderACollapsedParentIsKeptWhenCollapsedRowsAreShown() = runBlocking {
+        val parent = newTask(PARENT)
+        newTask(CHILD, parent = parent.id, dueDate = IN_RANGE)
+        taskDao.setCollapsed(listOf(parent.id), true)
+
+        val hidden = taskDao.fetchTasks(
+            TaskListQuery.getQuery(preferences(), filter, rowCondition = "tasks.dueDate = $IN_RANGE")
+        )
+        val shown = taskDao.fetchTasks(
+            TaskListQuery.getQuery(
+                preferences(),
+                filter,
+                showCollapsed = true,
+                rowCondition = "tasks.dueDate = $IN_RANGE",
+            )
+        )
+
+        assertEquals(emptyList<String>(), hidden.map { it.title })
+        assertEquals(listOf(CHILD), shown.map { it.title })
+    }
+
     companion object {
         private const val IN_RANGE = 1_700_000_000_000L
         private const val OUT_OF_RANGE = 1_800_000_000_000L
