@@ -84,6 +84,7 @@ import org.tasks.compose.home.HomeScreen
 import org.tasks.compose.navigateClearingBackStack
 import org.tasks.viewmodel.OnboardingNavigation
 import org.tasks.viewmodel.OnboardingScreen
+import org.tasks.data.createDueDate
 import org.tasks.data.dao.AlarmDao
 import org.tasks.data.dao.CaldavDao
 import org.tasks.data.dao.LocationDao
@@ -585,7 +586,14 @@ class MainActivity : AppCompatActivity() {
             firebase.addTask(source ?: "unknown")
             intent.removeExtra(CREATE_TASK)
             intent.removeExtra(CREATE_SOURCE)
+            val dueDate = intent.getLongExtra(CREATE_DUE_DATE, 0L)
+            intent.removeExtra(CREATE_DUE_DATE)
             taskCreator.createWithValues(filter ?: defaultFilterProvider.getDefaultList(), "")
+                .apply {
+                    if (dueDate > 0) {
+                        this.dueDate = createDueDate(Task.URGENCY_SPECIFIC_DAY, dueDate)
+                    }
+                }
         }
 
         intent.hasExtra(OPEN_TASK) -> {
@@ -659,6 +667,7 @@ class MainActivity : AppCompatActivity() {
         const val LOAD_FILTER = "load_filter"
         const val CREATE_TASK = "open_task" // $NON-NLS-1$
         const val CREATE_SOURCE = "create_source"
+        const val CREATE_DUE_DATE = "create_due_date"
         const val OPEN_TASK = "open_new_task" // $NON-NLS-1$
         const val REMOVE_TASK = "remove_task"
         const val FINISH_AFFINITY = "finish_affinity"
