@@ -195,7 +195,7 @@ internal class TasksWidgetBuilder(
                     setViewVisibility(R.id.divider, View.GONE)
                 }
                 removeAllViews(R.id.chips)
-                if (settings.showSubtaskChips && taskContainer.hasChildren()) {
+                if (settings.showSubtaskChips && !flatList && taskContainer.hasChildren()) {
                     val chip = chipProvider.getSubtaskChip(taskContainer)
                     addView(R.id.chips, chip)
                     setOnClickFillInIntent(
@@ -239,7 +239,7 @@ internal class TasksWidgetBuilder(
                             .putExtra(WidgetClickActivity.EXTRA_WIDGET, widgetId)
                     )
                 }
-                val startPad = taskContainer.indent * indentPadding
+                val startPad = if (flatList) 0 else taskContainer.indent * indentPadding
                 setViewPadding(R.id.widget_row, startPad, 0, 0, 0)
             }
         } catch (e: Exception) {
@@ -251,10 +251,17 @@ internal class TasksWidgetBuilder(
     internal suspend fun fetchTasks(
         limit: Int? = MAX_ITEMS,
         rowCondition: String? = null,
+        showCollapsed: Boolean = false,
     ): List<TaskContainer> {
         subtasksHelper.applySubtasksToWidgetFilter(filter, widgetPreferences)
         return taskDao.fetchTasks(
-            getQuery(widgetPreferences, filter, limit, rowCondition = rowCondition)
+            getQuery(
+                widgetPreferences,
+                filter,
+                limit,
+                showCollapsed = showCollapsed,
+                rowCondition = rowCondition,
+            )
         )
     }
 

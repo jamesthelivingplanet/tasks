@@ -122,6 +122,7 @@ class CalendarWidget : AppWidgetProvider() {
             val (start, end) = CalendarDays.visibleDates(today, selected, firstDay, monthMode)
             val tasks = builder.fetchTasks(
                 limit = null,
+                showCollapsed = true,
                 rowCondition = CalendarDays.dueCondition(start, end, selected == today, zone),
             )
             val dayTasks = tasks.filter {
