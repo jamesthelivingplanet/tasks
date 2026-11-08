@@ -7,6 +7,8 @@ import com.todoroo.astrid.activity.MainActivity.Companion.FINISH_AFFINITY
 import org.tasks.data.dao.TaskDao
 import org.tasks.data.TaskSaver
 import org.tasks.service.TaskCompleter
+import org.tasks.service.TaskDeleter
+import org.tasks.data.entity.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.launch
@@ -15,6 +17,7 @@ import org.tasks.analytics.Firebase
 import org.tasks.broadcast.RefreshBroadcaster
 import org.tasks.dialogs.BaseDateTimePicker.OnDismissHandler
 import org.tasks.dialogs.DateTimePicker.Companion.newDateTimePicker
+import org.tasks.dialogs.DialogBuilder
 import org.tasks.filters.Filter
 import org.tasks.intents.TaskIntents
 import org.tasks.preferences.DefaultFilterProvider
@@ -31,6 +34,8 @@ class WidgetClickActivity : AppCompatActivity(), OnDismissHandler {
     @Inject lateinit var preferences: Preferences
     @Inject lateinit var firebase: Firebase
     @Inject lateinit var defaultFilterProvider: DefaultFilterProvider
+    @Inject lateinit var dialogBuilder: DialogBuilder
+    @Inject lateinit var taskDeleter: TaskDeleter
 
     private val widgetId: Int
         get() = intent.getIntExtra(EXTRA_WIDGET, -1)
@@ -108,22 +113,18 @@ class WidgetClickActivity : AppCompatActivity(), OnDismissHandler {
                 val taskId = intent.getLongExtra(EXTRA_TASK_ID, 0L)
                 Timber.d("$action taskId=$taskId")
                 logWidgetClick("reschedule")
-                val fragmentManager = supportFragmentManager
-                if (fragmentManager.findFragmentByTag(FRAG_TAG_DATE_TIME_PICKER) == null) {
-                    lifecycleScope.launch {
-                        val task = taskDao.fetch(taskId)
-                        if (task != null) {
-                            newDateTimePicker(
-                                preferences.getBoolean(
-                                    R.string.p_auto_dismiss_datetime_widget,
-                                    false
-                                ),
-                                task
-                            )
-                                .show(fragmentManager, FRAG_TAG_DATE_TIME_PICKER)
-                        } else {
-                            finish()
-                        }
+                showDateTimePicker(taskId)
+            }
+            TASK_ACTIONS -> {
+                val taskId = intent.getLongExtra(EXTRA_TASK_ID, 0L)
+                Timber.d("$action taskId=$taskId widgetId=$widgetId")
+                logWidgetClick("task_actions")
+                lifecycleScope.launch {
+                    val task = taskDao.fetch(taskId)
+                    if (task == null) {
+                        finish()
+                    } else {
+                        showTaskActions(task)
                     }
                 }
             }
@@ -151,6 +152,73 @@ class WidgetClickActivity : AppCompatActivity(), OnDismissHandler {
         }
     }
 
+    private fun showDateTimePicker(taskId: Long) {
+        val fragmentManager = supportFragmentManager
+        if (fragmentManager.findFragmentByTag(FRAG_TAG_DATE_TIME_PICKER) == null) {
+            lifecycleScope.launch {
+                val task = taskDao.fetch(taskId)
+                if (task != null) {
+                    newDateTimePicker(
+                        preferences.getBoolean(R.string.p_auto_dismiss_datetime_widget, false),
+                        task
+                    )
+                        .show(fragmentManager, FRAG_TAG_DATE_TIME_PICKER)
+                } else {
+                    finish()
+                }
+            }
+        }
+    }
+
+    private fun showTaskActions(task: Task) {
+        val actions = listOf(
+            getString(
+                if (task.isCompleted) {
+                    R.string.calendar_action_uncomplete
+                } else {
+                    R.string.calendar_action_complete
+                }
+            ) to {
+                lifecycleScope.launch(NonCancellable) {
+                    taskCompleter.setComplete(task.id, !task.isCompleted)
+                    firebase.completeTask("widget")
+                }
+                finish()
+            },
+            getString(R.string.TAd_actionEditTask) to {
+                lifecycleScope.launch {
+                    startActivity(
+                        TaskIntents
+                            .getEditTaskIntent(this@WidgetClickActivity, widgetFilter(), task)
+                            .putExtra(FINISH_AFFINITY, true)
+                    )
+                    finish()
+                }
+                Unit
+            },
+            getString(R.string.calendar_action_reschedule) to { showDateTimePicker(task.id) },
+            getString(R.string.delete) to { confirmDelete(task) },
+        )
+        dialogBuilder
+            .newDialog(task.title ?: "")
+            .setItems(actions.map { it.first }) { _, which -> actions[which].second() }
+            .setOnCancelListener { finish() }
+            .show()
+    }
+
+    private fun confirmDelete(task: Task) {
+        dialogBuilder
+            .newDialog()
+            .setMessage(R.string.delete_tasks_warning, task.title ?: "")
+            .setPositiveButton(R.string.delete) { _, _ ->
+                lifecycleScope.launch(NonCancellable) { taskDeleter.markDeleted(task) }
+                finish()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ -> finish() }
+            .setOnCancelListener { finish() }
+            .show()
+    }
+
     private fun logWidgetClick(type: String) {
         firebase.logEvent(
             R.string.event_widget_click,
@@ -170,6 +238,7 @@ class WidgetClickActivity : AppCompatActivity(), OnDismissHandler {
         const val TOGGLE_SUBTASKS = "TOGGLE_SUBTASKS"
         const val RESCHEDULE_TASK = "RESCHEDULE_TASK"
         const val TOGGLE_GROUP = "TOGGLE_GROUP"
+        const val TASK_ACTIONS = "TASK_ACTIONS"
         const val EXTRA_TASK_ID = "extra_task_id"
         const val EXTRA_COLLAPSED = "extra_collapsed"
         const val EXTRA_COMPLETED = "extra_completed"
