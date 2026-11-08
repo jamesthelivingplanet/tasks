@@ -79,6 +79,46 @@ internal object CalendarDays {
         return if (month == YearMonth.from(today)) today else month.atDay(1)
     }
 
+    /**
+     * The dates the pages around [selected] can show, as a start (inclusive) and end (exclusive).
+     * This covers every cell of [weekWindow] or [monthWindow], including the adjacent-month days
+     * a month grid dims.
+     */
+    fun visibleDates(
+        today: LocalDate,
+        selected: LocalDate,
+        firstDay: DayOfWeek,
+        monthMode: Boolean,
+    ): Pair<LocalDate, LocalDate> =
+        if (monthMode) {
+            val months = monthWindow(today, selected).months
+            months.first().atDay(1).minusDays(7) to months.last().atEndOfMonth().plusDays(8)
+        } else {
+            val starts = weekWindow(today, selected, firstDay).starts
+            starts.first() to starts.last().plusWeeks(1)
+        }
+
+    /**
+     * SQL condition on `tasks` for the rows the calendar can use: tasks due from [start] up to
+     * (not including) [end], plus uncompleted overdue tasks when [includeOverdue] (the list for
+     * today shows them).
+     */
+    fun dueCondition(
+        start: LocalDate,
+        end: LocalDate,
+        includeOverdue: Boolean,
+        zone: ZoneId,
+    ): String {
+        val from = start.atStartOfDay(zone).toInstant().toEpochMilli()
+        val to = end.atStartOfDay(zone).toInstant().toEpochMilli()
+        val overdue = if (includeOverdue) {
+            " OR (tasks.dueDate > 0 AND tasks.dueDate < $from AND tasks.completed = 0)"
+        } else {
+            ""
+        }
+        return "((tasks.dueDate >= $from AND tasks.dueDate < $to)$overdue)"
+    }
+
     /** The month grid needs more room than a 4x2 widget has. */
     fun isMonthMode(heightDp: Int): Boolean = heightDp >= MONTH_MIN_HEIGHT_DP
 

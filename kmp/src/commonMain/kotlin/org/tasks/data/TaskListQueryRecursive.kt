@@ -18,6 +18,7 @@ internal object TaskListQueryRecursive {
         preferences: QueryPreferences,
         limit: Int? = null,
         showCollapsed: Boolean = false,
+        rowCondition: String? = null,
     ): String {
         val parentQuery = when (filter) {
             is CaldavFilter -> newCaldavQuery(filter.uuid)
@@ -172,6 +173,7 @@ internal object TaskListQueryRecursive {
                 LEFT JOIN descendants ON descendants.parent = tasks._id
                 LEFT JOIN tags ON tags.task = tasks._id
                 ${TaskListQuery.JOINS}
+            ${rowCondition?.let { "WHERE $it" } ?: ""}
             GROUP BY tasks._id
             ORDER BY sequence
             ${limit?.let { "LIMIT $it" } ?: ""}

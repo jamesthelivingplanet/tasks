@@ -252,9 +252,14 @@ internal class TasksWidgetBuilder(
         }
     }
 
-    internal suspend fun fetchTasks(limit: Int? = MAX_ITEMS): List<TaskContainer> {
+    internal suspend fun fetchTasks(
+        limit: Int? = MAX_ITEMS,
+        rowCondition: String? = null,
+    ): List<TaskContainer> {
         subtasksHelper.applySubtasksToWidgetFilter(filter, widgetPreferences)
-        return taskDao.fetchTasks(getQuery(widgetPreferences, filter, limit))
+        return taskDao.fetchTasks(
+            getQuery(widgetPreferences, filter, limit, rowCondition = rowCondition)
+        )
     }
 
     private fun formatDueDate(

@@ -119,7 +119,11 @@ class CalendarWidget : AppWidgetProvider() {
             rowActions = true,
         )
         val (tasks, items) = runBlocking {
-            val tasks = builder.fetchTasks(limit = null)
+            val (start, end) = CalendarDays.visibleDates(today, selected, firstDay, monthMode)
+            val tasks = builder.fetchTasks(
+                limit = null,
+                rowCondition = CalendarDays.dueCondition(start, end, selected == today, zone),
+            )
             val dayTasks = tasks.filter {
                 CalendarDays.isShownOn(it.task.dueDate, it.task.isCompleted, selected, today, zone)
             }

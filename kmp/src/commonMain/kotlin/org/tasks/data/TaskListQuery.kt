@@ -37,23 +37,30 @@ object TaskListQuery {
             field("geofences.*"),
             field("places.*"))
 
+    /**
+     * [rowCondition] is an optional SQL condition on the `tasks` table (e.g. `tasks.dueDate > 0`)
+     * applied to the final result, after subtasks have been resolved, so the rows returned are
+     * exactly those of the unconditioned query that satisfy it. Only the recursive query applies
+     * it; the other query ignores it, so callers must still check the condition on the rows.
+     */
     @JvmStatic
     fun getQuery(
         preferences: QueryPreferences,
         filter: Filter,
         limit: Int? = null,
         showCollapsed: Boolean = false,
+        rowCondition: String? = null,
     ): String {
         val start = currentTimeMillis()
         return when {
             filter.supportsManualSort() && preferences.isManualSort ->
-                getRecursiveQuery(filter, preferences, limit, showCollapsed)
+                getRecursiveQuery(filter, preferences, limit, showCollapsed, rowCondition)
 
             filter is AstridOrderingFilter && preferences.isAstridSort ->
                 getNonRecursiveQuery(filter, preferences, limit)
 
             filter.supportsSorting() ->
-                getRecursiveQuery(filter, preferences, limit, showCollapsed)
+                getRecursiveQuery(filter, preferences, limit, showCollapsed, rowCondition)
 
             else -> getNonRecursiveQuery(filter, preferences, limit)
         }.also { Logger.v("TaskListQuery") { "Building query took ${currentTimeMillis() - start}ms" } }
