@@ -29,12 +29,18 @@ internal object TaskListQueryNonRecursive {
             field("tasks.completed > 0").`as`("parent_complete")
         )).toTypedArray()
 
-    fun getNonRecursiveQuery(filter: Filter, preferences: QueryPreferences, limit: Int? = null): String {
+    fun getNonRecursiveQuery(
+        filter: Filter,
+        preferences: QueryPreferences,
+        limit: Int? = null,
+        rowCondition: String? = null,
+    ): String {
         val joinedQuery = JOINS + if (filter is AstridOrderingFilter) filter.getSqlQuery() else filter.sql!!
         val sortMode = preferences.sortMode
         val groupMode = preferences.groupMode
         val sortGroup = field(SortHelper.getSortGroup(groupMode) ?: "NULL").`as`("sortGroup")
         val query = SortHelper.adjustQueryForFlagsAndSort(preferences, joinedQuery, sortMode)
+            .withRowCondition(rowCondition)
         val completeAtBottom = if (preferences.completedTasksAtBottom) "parent_complete ASC," else ""
         val completionSort = if (preferences.completedTasksAtBottom) {
                 "tasks.completed DESC,"
@@ -57,5 +63,18 @@ internal object TaskListQueryNonRecursive {
             .from(Task.TABLE)
             .toString()
         return if (limit != null) "$result LIMIT $limit" else result
+    }
+
+    /** Filter queries are `... WHERE <criteria> ORDER BY ...`; append to the criteria. */
+    private fun String.withRowCondition(condition: String?): String {
+        if (condition == null || !contains("WHERE", ignoreCase = true)) {
+            return this
+        }
+        val orderBy = indexOf("ORDER BY", ignoreCase = true)
+        return if (orderBy < 0) {
+            "$this AND ($condition)"
+        } else {
+            "${substring(0, orderBy)}AND ($condition) ${substring(orderBy)}"
+        }
     }
 }

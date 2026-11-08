@@ -165,4 +165,54 @@ class CalendarDaysTest {
         assertFalse(CalendarDays.isMonthMode(230))
         assertTrue(CalendarDays.isMonthMode(358))
     }
+
+    @Test
+    fun visibleDatesCoverEveryWeekPage() {
+        val today = LocalDate.of(2026, 11, 8)
+        val window = CalendarDays.weekWindow(today, today, DayOfWeek.MONDAY)
+        val (start, end) = CalendarDays.visibleDates(today, today, DayOfWeek.MONDAY, false)
+        assertEquals(window.starts.first(), start)
+        assertEquals(window.starts.last().plusDays(7), end)
+    }
+
+    @Test
+    fun visibleDatesCoverEveryMonthGridCell() {
+        val today = LocalDate.of(2026, 11, 8)
+        val (start, end) = CalendarDays.visibleDates(today, today, DayOfWeek.SUNDAY, true)
+        CalendarDays.monthWindow(today, today).months.forEach { month ->
+            val days = CalendarDays.monthGrid(month, DayOfWeek.SUNDAY).flatten()
+            assertTrue(days.all { it >= start && it < end })
+        }
+    }
+
+    @Test
+    fun narrowPagesShrinkTheVisibleDates() {
+        val today = LocalDate.of(2026, 11, 8)
+        val full = CalendarDays.visibleDates(today, today, DayOfWeek.MONDAY, true)
+        val narrow = CalendarDays.visibleDates(today, today, DayOfWeek.MONDAY, true, 1)
+        assertTrue(narrow.first > full.first && narrow.second < full.second)
+        val weeks = CalendarDays.visibleDates(today, today, DayOfWeek.MONDAY, false, 1)
+        assertEquals(today.with(java.time.temporal.TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).minusWeeks(1), weeks.first)
+        assertEquals(3, CalendarDays.weekWindow(today, today, DayOfWeek.MONDAY, 1).starts.size)
+    }
+
+    @Test
+    fun dueConditionUsesLocalDayBoundaries() {
+        val zone = java.time.ZoneId.of("Pacific/Auckland")
+        val day = LocalDate.of(2026, 11, 8)
+        val from = day.atStartOfDay(zone).toInstant().toEpochMilli()
+        val to = day.plusDays(1).atStartOfDay(zone).toInstant().toEpochMilli()
+        assertEquals(
+            "((tasks.dueDate >= $from AND tasks.dueDate < $to))",
+            CalendarDays.dueCondition(day, day.plusDays(1), false, zone),
+        )
+    }
+
+    @Test
+    fun dueConditionAddsUncompletedOverdueOnlyForToday() {
+        val zone = java.time.ZoneId.of("UTC")
+        val day = LocalDate.of(2026, 11, 8)
+        assertFalse(CalendarDays.dueCondition(day, day.plusDays(1), false, zone).contains("completed"))
+        assertTrue(CalendarDays.dueCondition(day, day.plusDays(1), true, zone).contains("tasks.completed = 0"))
+    }
 }
