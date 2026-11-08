@@ -13,11 +13,15 @@ object TaskIntents {
     fun getNewTaskIntent(
         context: Context,
         filter: Filter?,
-        createSource: String
+        createSource: String,
+        dueDate: Long = 0L,
     ): Intent {
         val intent = Intent(context, MainActivity::class.java)
         if (filter != null) {
             intent.putExtra(MainActivity.OPEN_FILTER, filter)
+        }
+        if (dueDate > 0) {
+            intent.putExtra(MainActivity.CREATE_DUE_DATE, dueDate)
         }
         intent.putExtra(MainActivity.CREATE_TASK, 0L)
         intent.putExtra(MainActivity.CREATE_SOURCE, createSource)
