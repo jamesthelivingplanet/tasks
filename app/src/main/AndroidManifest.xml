@@ -353,6 +353,23 @@
     </receiver>
 
     <receiver
+      android:label="@string/calendar_widget_name"
+      android:name=".widget.CalendarWidget"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/calendar_widget_provider_info"/>
+    </receiver>
+
+    <receiver
+      android:name=".widget.CalendarActionReceiver"
+      android:exported="false" />
+
+    <receiver
         android:name=".widget.RequestPinWidgetReceiver"
         android:exported="false">
       <intent-filter>

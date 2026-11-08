@@ -16,20 +16,37 @@ class AppWidgetManager @Inject constructor(
     }
 
     val widgetIds: IntArray
-        get() = appWidgetManager
-                ?.getAppWidgetIds(ComponentName(context, TasksWidget::class.java))
-                ?: intArrayOf()
+        get() = listOf(TasksWidget::class.java, CalendarWidget::class.java)
+            .flatMap {
+                appWidgetManager?.getAppWidgetIds(ComponentName(context, it))?.toList()
+                    ?: emptyList()
+            }
+            .toIntArray()
 
     fun rebuildWidgets(vararg appWidgetIds: Int) {
         if (appWidgetIds.isEmpty()) {
             return
         }
         Timber.d("rebuildWidgets(${appWidgetIds.joinToString()})")
-        val intent = Intent(context, TasksWidget::class.java)
-            .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
-            .apply { action = AppWidgetManager.ACTION_APPWIDGET_UPDATE }
-        context.sendBroadcast(intent)
+        // Each widget id is routed to the provider that owns it
+        appWidgetIds
+            .groupBy { providerFor(it) }
+            .forEach { (provider, ids) ->
+                val intent = Intent(context, provider)
+                    .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids.toIntArray())
+                    .apply { action = AppWidgetManager.ACTION_APPWIDGET_UPDATE }
+                context.sendBroadcast(intent)
+            }
     }
+
+    private fun providerFor(appWidgetId: Int): Class<*> =
+        if (appWidgetManager?.getAppWidgetInfo(appWidgetId)?.provider?.className ==
+            CalendarWidget::class.java.name
+        ) {
+            CalendarWidget::class.java
+        } else {
+            TasksWidget::class.java
+        }
 
     fun updateWidgets() {
         rebuildWidgets(*widgetIds)

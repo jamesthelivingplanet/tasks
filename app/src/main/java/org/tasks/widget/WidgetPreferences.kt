@@ -186,6 +186,18 @@ class WidgetPreferences(
         preferences.remove(KEYS.map { getKey(it) })
     }
 
+    /** Epoch day of the day selected in the calendar widget, or null to follow today. */
+    var calendarSelectedDay: Long?
+        get() = getInt(R.string.p_calendar_widget_selected_day, NO_SELECTED_DAY)
+            .takeIf { it != NO_SELECTED_DAY }
+            ?.toLong()
+        set(value) {
+            setInt(
+                R.string.p_calendar_widget_selected_day,
+                value?.toInt() ?: NO_SELECTED_DAY
+            )
+        }
+
     fun setCompact(compact: Boolean) {
         setBoolean(R.string.p_widget_compact, compact)
     }
@@ -301,6 +313,7 @@ class WidgetPreferences(
         }
 
     companion object {
+        private const val NO_SELECTED_DAY = Int.MIN_VALUE
         private val KEYS = listOf(
             R.string.p_widget_filter,
             R.string.p_widget_theme,
@@ -339,6 +352,7 @@ class WidgetPreferences(
             R.string.p_widget_header_spacing,
             R.string.p_widget_spacing,
             R.string.p_widget_collapsed,
+            R.string.p_calendar_widget_selected_day,
         )
     }
 }

@@ -267,6 +267,7 @@
   <string name="p_widget_header_spacing">widget-header-spacing-</string>
   <string name="p_widget_spacing">widget-spacing-</string>
   <string name="p_widget_collapsed">widget-collapsed-</string>
+  <string name="p_calendar_widget_selected_day">calendar-widget-selected-day-</string>
   <string name="p_dashclock_filter">dashclock_filter</string>
   <string name="p_default_list">default_remote_list</string>
   <string name="p_default_tags">default_tags</string>

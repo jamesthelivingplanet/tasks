@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/calendar_widget"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <RelativeLayout
+    android:id="@+id/calendar_header"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
+
+    <FrameLayout
+      android:id="@+id/calendar_today"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_alignParentStart="true"
+      android:layout_centerVertical="true"
+      android:contentDescription="@string/today">
+
+      <ImageView
+        android:id="@+id/calendar_today_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_calendar_frame" />
+
+      <TextView
+        android:id="@+id/calendar_today_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-light"
+        android:fontVariationSettings="'wght' 200"
+        android:textSize="10sp"
+        tools:text="7" />
+    </FrameLayout>
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_centerInParent="true"
+      android:gravity="center_vertical"
+      android:orientation="horizontal">
+
+      <ImageButton
+        android:id="@+id/calendar_previous"
+        style="@style/WidgetButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:contentDescription="@string/calendar_widget_previous"
+        android:rotation="90"
+        android:src="@drawable/calendar_ic_chevron" />
+
+      <TextView
+        android:id="@+id/calendar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:fontFamily="sans-serif-light"
+        android:fontVariationSettings="'wght' 200"
+        android:textSize="20sp"
+        tools:text="November" />
+
+      <ImageButton
+        android:id="@+id/calendar_next"
+        style="@style/WidgetButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:contentDescription="@string/calendar_widget_next"
+        android:rotation="-90"
+        android:src="@drawable/calendar_ic_chevron" />
+    </LinearLayout>
+
+    <ImageButton
+      android:id="@+id/calendar_settings"
+      style="@style/WidgetButton"
+      android:layout_width="36dp"
+      android:layout_height="36dp"
+      android:layout_alignParentEnd="true"
+      android:contentDescription="@string/widget_settings"
+      android:src="@drawable/calendar_ic_settings" />
+
+    <ImageButton
+      android:id="@+id/calendar_add"
+      style="@style/WidgetButton"
+      android:layout_width="36dp"
+      android:layout_height="36dp"
+      android:layout_toStartOf="@id/calendar_settings"
+      android:contentDescription="@string/action_create_new_task"
+      android:src="@drawable/calendar_ic_add" />
+  </RelativeLayout>
+
+  <LinearLayout
+    android:id="@+id/calendar_weekdays"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp">
+
+    <TextView android:id="@+id/calendar_weekday_0" style="@style/CalendarWeekday" />
+    <TextView android:id="@+id/calendar_weekday_1" style="@style/CalendarWeekday" />
+    <TextView android:id="@+id/calendar_weekday_2" style="@style/CalendarWeekday" />
+    <TextView android:id="@+id/calendar_weekday_3" style="@style/CalendarWeekday" />
+    <TextView android:id="@+id/calendar_weekday_4" style="@style/CalendarWeekday" />
+    <TextView android:id="@+id/calendar_weekday_5" style="@style/CalendarWeekday" />
+    <TextView android:id="@+id/calendar_weekday_6" style="@style/CalendarWeekday" />
+  </LinearLayout>
+
+  <AdapterViewFlipper
+    android:id="@+id/calendar_week_flipper"
+    android:layout_width="match_parent"
+    android:layout_height="46dp"
+    android:animateFirstView="false"
+    android:autoStart="false"
+    android:inAnimation="@animator/calendar_page_in"
+    android:outAnimation="@animator/calendar_page_out"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp" />
+
+  <AdapterViewFlipper
+    android:id="@+id/calendar_month_flipper"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:animateFirstView="false"
+    android:autoStart="false"
+    android:inAnimation="@animator/calendar_page_in"
+    android:outAnimation="@animator/calendar_page_out"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:visibility="gone" />
+
+  <ImageView
+    android:id="@+id/calendar_divider"
+    android:importantForAccessibility="no"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="4dp" />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+
+    <ListView
+      android:id="@+id/list_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:divider="@null"
+      android:dividerHeight="0dp"
+      android:listSelector="@android:color/transparent" />
+
+    <TextView
+      android:id="@+id/empty_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:text="@string/calendar_widget_empty" />
+  </FrameLayout>
+</LinearLayout>
