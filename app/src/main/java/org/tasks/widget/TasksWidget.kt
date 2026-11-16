@@ -287,7 +287,7 @@ class TasksWidget : AppWidgetProvider() {
 
     companion object {
         private const val COMPACT_MAX = 275
-        private val updateLock = Mutex()
+        internal val updateLock = Mutex()
         private const val FLAGS = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
     }
 }

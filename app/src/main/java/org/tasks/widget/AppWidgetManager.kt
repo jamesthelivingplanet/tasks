@@ -15,13 +15,16 @@ class AppWidgetManager @Inject constructor(
         AppWidgetManager.getInstance(context)
     }
 
+    /** Ids of the list widgets only. */
+    val taskListWidgetIds: IntArray
+        get() = idsFor(TasksWidget::class.java)
+
+    /** Ids of every widget, list and calendar. */
     val widgetIds: IntArray
-        get() = listOf(TasksWidget::class.java, CalendarWidget::class.java)
-            .flatMap {
-                appWidgetManager?.getAppWidgetIds(ComponentName(context, it))?.toList()
-                    ?: emptyList()
-            }
-            .toIntArray()
+        get() = taskListWidgetIds + idsFor(CalendarWidget::class.java)
+
+    private fun idsFor(provider: Class<*>): IntArray =
+        appWidgetManager?.getAppWidgetIds(ComponentName(context, provider)) ?: IntArray(0)
 
     fun rebuildWidgets(vararg appWidgetIds: Int) {
         if (appWidgetIds.isEmpty()) {
@@ -29,8 +32,9 @@ class AppWidgetManager @Inject constructor(
         }
         Timber.d("rebuildWidgets(${appWidgetIds.joinToString()})")
         // Each widget id is routed to the provider that owns it
-        appWidgetIds
-            .groupBy { providerFor(it) }
+        appWidgetIds.toList()
+            .mapNotNull { id -> providerFor(id)?.let { it to id } }
+            .groupBy({ it.first }, { it.second })
             .forEach { (provider, ids) ->
                 val intent = Intent(context, provider)
                     .putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids.toIntArray())
@@ -39,13 +43,12 @@ class AppWidgetManager @Inject constructor(
             }
     }
 
-    private fun providerFor(appWidgetId: Int): Class<*> =
-        if (appWidgetManager?.getAppWidgetInfo(appWidgetId)?.provider?.className ==
-            CalendarWidget::class.java.name
-        ) {
-            CalendarWidget::class.java
-        } else {
-            TasksWidget::class.java
+    /** The provider that owns [appWidgetId], or null if the widget no longer exists. */
+    private fun providerFor(appWidgetId: Int): Class<*>? =
+        when (appWidgetManager?.getAppWidgetInfo(appWidgetId)?.provider?.className) {
+            CalendarWidget::class.java.name -> CalendarWidget::class.java
+            TasksWidget::class.java.name -> TasksWidget::class.java
+            else -> null
         }
 
     fun updateWidgets() {

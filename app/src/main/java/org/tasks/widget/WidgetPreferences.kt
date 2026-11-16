@@ -342,6 +342,7 @@ class WidgetPreferences(
             R.string.p_widget_show_description,
             R.string.p_widget_show_full_description,
             R.string.p_widget_show_checkboxes,
+            R.string.p_calendar_widget_selected_day,
             R.string.p_widget_show_header,
             R.string.p_widget_show_settings,
             R.string.p_widget_show_title,

@@ -16,7 +16,11 @@ import com.todoroo.andlib.utility.AndroidUtilities.atLeastS
 import com.todoroo.astrid.activity.MainActivity.Companion.FINISH_AFFINITY
 import com.todoroo.astrid.subtasks.SubtasksHelper
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.withLock
 import kotlinx.datetime.isoDayNumber
 import org.tasks.R
 import org.tasks.kmp.firstDayOfWeek
@@ -30,6 +34,7 @@ import org.tasks.extensions.estimateParcelSize
 import org.tasks.extensions.setBackgroundColor
 import org.tasks.extensions.setColorFilter
 import org.tasks.filters.Filter
+import org.tasks.injection.ApplicationScope
 import org.tasks.intents.TaskIntents
 import org.tasks.markdown.MarkdownProvider
 import org.tasks.preferences.DefaultFilterProvider
@@ -59,17 +64,45 @@ class CalendarWidget : AppWidgetProvider() {
     @Inject lateinit var chipProvider: WidgetChipProvider
     @Inject lateinit var markdownProvider: MarkdownProvider
     @Inject lateinit var headerFormatter: HeaderFormatter
+    @Inject @ApplicationScope lateinit var scope: CoroutineScope
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         Timber.d("onUpdate appWidgetIds=${appWidgetIds.joinToString()}")
-        appWidgetIds.forEach { id ->
+        update(context, appWidgetManager, appWidgetIds.toList()) {
+            appWidgetManager.getAppWidgetOptions(it)
+        }
+    }
+
+    private fun update(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: List<Int>,
+        options: (Int) -> Bundle,
+    ) {
+        val pendingResult = goAsync()
+        scope.launch(Dispatchers.IO) {
             try {
-                val monthMode = isMonthMode(appWidgetManager.getAppWidgetOptions(id))
-                val remoteViews = createWidget(context, id, monthMode)
-                Timber.d("Widget $id main layout: ${Formatter.formatShortFileSize(context, remoteViews.estimateParcelSize().toLong())}")
-                appWidgetManager.updateAppWidget(id, remoteViews)
-            } catch (e: Exception) {
-                Timber.e(e)
+                TasksWidget.updateLock.withLock {
+                    appWidgetIds.forEach { id ->
+                        try {
+                            val monthMode = isMonthMode(options(id))
+                            var remoteViews = createWidget(context, id, monthMode)
+                            if (remoteViews.estimateParcelSize() > TasksWidgetBuilder.MAX_PARCEL_SIZE) {
+                                // Too big for Android 16+: keep only the pages next to the selected one
+                                Timber.d("Widget $id too large, narrowing pages")
+                                remoteViews = createWidget(context, id, monthMode, NARROW_PAGES_EACH_SIDE)
+                            }
+                            Timber.d("Widget $id main layout: ${Formatter.formatShortFileSize(context, remoteViews.estimateParcelSize().toLong())}")
+                            appWidgetManager.updateAppWidget(id, remoteViews)
+                        } catch (e: CancellationException) {
+                            throw e
+                        } catch (e: Exception) {
+                            Timber.e(e)
+                        }
+                    }
+                }
+            } finally {
+                pendingResult.finish()
             }
         }
     }
@@ -84,20 +117,25 @@ class CalendarWidget : AppWidgetProvider() {
             "onAppWidgetOptionsChanged appWidgetId=$appWidgetId " +
                     "maxHeight=${newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)}dp"
         )
-        onUpdate(context, appWidgetManager, intArrayOf(appWidgetId))
+        update(context, appWidgetManager, listOf(appWidgetId)) { newOptions }
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         appWidgetIds.forEach { WidgetPreferences(context, preferences, it).delete() }
     }
 
-    private fun createWidget(context: Context, id: Int, monthMode: Boolean): RemoteViews {
+    private suspend fun createWidget(
+        context: Context,
+        id: Int,
+        monthMode: Boolean,
+        pagesEachSide: Int? = null,
+    ): RemoteViews {
         val widgetPreferences = WidgetPreferences(context, preferences, id)
         val header = widgetPreferences.getWidgetHeaderSettings()
         val zone = ZoneId.systemDefault()
         val today = LocalDate.now(zone)
         val selected = widgetPreferences.calendarSelectedDay?.let(LocalDate::ofEpochDay) ?: today
-        val filter = runBlocking { defaultFilterProvider.getFilterFromPreference(widgetPreferences.filterId) }
+        val filter = defaultFilterProvider.getFilterFromPreference(widgetPreferences.filterId)
         val accent = ThemeColor(context, header.color)
         val onSurface = context.getColor(if (header.isDark) R.color.white_87 else R.color.black_87)
         val onSurfaceVariant = context.getColor(if (header.isDark) R.color.white_60 else R.color.black_60)
@@ -118,18 +156,16 @@ class CalendarWidget : AppWidgetProvider() {
             flatList = true,
             rowActions = true,
         )
-        val (tasks, items) = runBlocking {
-            val (start, end) = CalendarDays.visibleDates(today, selected, firstDay, monthMode)
-            val tasks = builder.fetchTasks(
-                limit = null,
-                showCollapsed = true,
-                rowCondition = CalendarDays.dueCondition(start, end, selected == today, zone),
-            )
-            val dayTasks = tasks.filter {
-                CalendarDays.isShownOn(it.task.dueDate, it.task.isCompleted, selected, today, zone)
-            }
-            tasks to builder.buildItems(dayTasks)
+        val (start, end) = CalendarDays.visibleDates(today, selected, firstDay, monthMode, pagesEachSide)
+        val tasks = builder.fetchTasks(
+            limit = null,
+            showCollapsed = true,
+            rowCondition = CalendarDays.dueCondition(start, end, selected == today, zone),
+        )
+        val dayTasks = tasks.filter {
+            CalendarDays.isShownOn(it.task.dueDate, it.task.isCompleted, selected, today, zone)
         }
+        val items = builder.buildItems(dayTasks)
         val daysWithTasks = CalendarDays.daysWithTasks(
             tasks.filterNot { it.task.isCompleted }.map { it.task.dueDate },
             zone,
@@ -142,9 +178,9 @@ class CalendarWidget : AppWidgetProvider() {
             setInt(R.id.calendar_divider, "setBackgroundColor", divider)
             val style = DayStyle(id, today, selected, daysWithTasks, accent, onSurface, onSurfaceDim)
             if (monthMode) {
-                setupMonths(context, id, style, firstDay)
+                setupMonths(context, id, style, firstDay, pagesEachSide)
             } else {
-                setupWeeks(context, id, style, firstDay)
+                setupWeeks(context, id, style, firstDay, pagesEachSide)
             }
             setViewVisibility(R.id.calendar_week_flipper, if (monthMode) View.GONE else View.VISIBLE)
             setViewVisibility(R.id.calendar_month_flipper, if (monthMode) View.VISIBLE else View.GONE)
@@ -212,8 +248,11 @@ class CalendarWidget : AppWidgetProvider() {
         widgetId: Int,
         style: DayStyle,
         firstDay: DayOfWeek,
+        pagesEachSide: Int?,
     ) {
-        val window = CalendarDays.weekWindow(style.today, style.selected, firstDay)
+        val window = CalendarDays.weekWindow(
+            style.today, style.selected, firstDay, pagesEachSide ?: CalendarDays.WEEKS_EACH_SIDE,
+        )
         val items = RemoteCollectionItems.Builder().setHasStableIds(true).setViewTypeCount(1)
         window.starts.forEach { start ->
             val week = RemoteViews(context.packageName, R.layout.calendar_week)
@@ -230,8 +269,11 @@ class CalendarWidget : AppWidgetProvider() {
         widgetId: Int,
         style: DayStyle,
         firstDay: DayOfWeek,
+        pagesEachSide: Int?,
     ) {
-        val window = CalendarDays.monthWindow(style.today, style.selected)
+        val window = CalendarDays.monthWindow(
+            style.today, style.selected, pagesEachSide ?: CalendarDays.MONTHS_EACH_SIDE,
+        )
         val items = RemoteCollectionItems.Builder().setHasStableIds(true).setViewTypeCount(1)
         window.months.forEach { month ->
             val page = RemoteViews(context.packageName, R.layout.calendar_month)
@@ -387,6 +429,8 @@ class CalendarWidget : AppWidgetProvider() {
             R.id.calendar_weekday_3, R.id.calendar_weekday_4, R.id.calendar_weekday_5,
             R.id.calendar_weekday_6,
         )
+        // RemoteViews ids must be unique across a layout and <include> can't rename them, so the
+        // cells are expanded by hand in the layouts and listed by id here.
         private val WEEK_DAYS = listOf(
             DayViews(R.id.calendar_cell_0, R.id.calendar_day_bg_0, R.id.calendar_day_text_0, R.id.calendar_day_dot_0),
             DayViews(R.id.calendar_cell_1, R.id.calendar_day_bg_1, R.id.calendar_day_text_1, R.id.calendar_day_dot_1),
@@ -449,6 +493,7 @@ class CalendarWidget : AppWidgetProvider() {
             R.id.calendar_month_row_5,
         )
         private const val DIMMED_ALPHA = 97
+        private const val NARROW_PAGES_EACH_SIDE = 1
 
         fun isMonthMode(options: Bundle): Boolean =
             CalendarDays.isMonthMode(options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT))

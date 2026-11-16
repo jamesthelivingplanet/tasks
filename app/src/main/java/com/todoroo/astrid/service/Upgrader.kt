@@ -137,7 +137,7 @@ class Upgrader @Inject constructor(
             }
             run(from, V14_5_4) {
                 // save existing default widget sorting
-                for (widgetId in widgetManager.widgetIds) {
+                for (widgetId in widgetManager.taskListWidgetIds) {
                     val widgetPreferences = WidgetPreferences(context, preferences, widgetId)
                     if (preferences.getInt(context.getString(R.string.p_widget_group) + widgetId, -1) == -1) {
                         widgetPreferences.groupMode = SortHelper.GROUP_NONE
@@ -204,7 +204,7 @@ class Upgrader @Inject constructor(
     }
 
     private fun migrateWidgets() {
-        for (widgetId in widgetManager.widgetIds) {
+        for (widgetId in widgetManager.taskListWidgetIds) {
             val widgetPreferences = WidgetPreferences(context, preferences, widgetId)
             widgetPreferences.maintainExistingConfiguration()
         }
